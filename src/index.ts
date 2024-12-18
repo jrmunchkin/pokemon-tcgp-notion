@@ -20,6 +20,9 @@ mediaRoutes.forEach((route) => {
   app.use(`/images-${route}`, express.static(path.join(__dirname, `medias/${route}`)));
 });
 
+// Static routes for assets zip
+app.use(`/assets`, express.static(path.join(__dirname, `medias/assets.zip`)));
+
 // Utility function to sync or prepare Notion data
 async function prepareData(
   notion: any,

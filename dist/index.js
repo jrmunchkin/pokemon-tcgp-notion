@@ -29,6 +29,8 @@ const mediaRoutes = ["expansions", "packs", "types", "rarities", "cards"];
 mediaRoutes.forEach((route) => {
     app.use(`/images-${route}`, express_1.default.static(path_1.default.join(__dirname, `medias/${route}`)));
 });
+// Static routes for assets zip
+app.use(`/assets`, express_1.default.static(path_1.default.join(__dirname, `medias/assets.zip`)));
 // Utility function to sync or prepare Notion data
 function prepareData(notion, notionClient, clientDB, originDB, mediaType, additionalProperties = () => ({})) {
     return __awaiter(this, void 0, void 0, function* () {

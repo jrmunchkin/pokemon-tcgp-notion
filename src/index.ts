@@ -42,7 +42,7 @@ async function prepareData(
 
   for (const originItem of originItems.results) {
     const originName = originItem.properties.Name.title[0].text.content;
-
+    console.log(clientItems);
     const match = clientItems.results.find(
       (clientItem: any) => clientItem.properties.Name.title[0].text.content === originName
     );

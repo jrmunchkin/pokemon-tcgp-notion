@@ -41,7 +41,8 @@ function prepareData(notion, notionClient, clientDB, originDB, mediaType, additi
         const objectMap = {};
         for (const originItem of originItems.results) {
             const originName = originItem.properties.Name.title[0].text.content;
-            console.log(clientItems);
+            console.log(clientItems.properties);
+            console.log(originName);
             const match = clientItems.results.find((clientItem) => clientItem.properties.Name.title[0].text.content === originName);
             if (match) {
                 objectMap[originItem.id] = { id: match.id, name: originName };

@@ -54,6 +54,7 @@ interface TCGCard {
   };
   hp?: number;
   types?: string[];
+  trainerType?: string;
   description?: string;
   boosters: Array<{
     name: string;
@@ -205,7 +206,14 @@ async function insertCardToNotion(card: TCGCard, syncId: number, uuids: any): Pr
           number: card.hp || null,
         },
         'Type': {
-          relation: card.types?.filter(type => uuids.types[type]).map(type => ({ id: uuids.types[type] })) || [],
+          relation: (() => {
+            if (card.types && card.types.length > 0) {
+              return card.types.filter(type => uuids.types[type]).map(type => ({ id: uuids.types[type] }));
+            } else if (card.trainerType && uuids.types[card.trainerType]) {
+              return [{ id: uuids.types[card.trainerType] }];
+            }
+            return [];
+          })(),
         },
         'Flavor': {
           rich_text: [{ text: { content: card.description || '' } }],
